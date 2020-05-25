@@ -1,8 +1,12 @@
 $(function() {
-    $('body').append('<div></div>');
-    $('#button-add').click(function() {
+    $('body').append('<div class="todo"></div>');
+    $('#add_btn').click(function() {
         var textValue = $('#text').val();
-        $('ul').append(`<input type="checkbox"><label>${textValue}</label>`);
+        $('div.todo').append(`<input type="checkbox" class="checkbox"><label>${textValue}</label>`);
         $('#text').val('');
     })
+    $('#edit_btn').click(function() {
+        $('input').removeClass('checkbox');
+    });
+
 })

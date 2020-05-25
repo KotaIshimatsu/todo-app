@@ -1,0 +1,11 @@
+.checkbox {
+    display: none;
+}
+label {
+    font-size: 40px;
+    
+}
+.todo {
+    display: flex;
+    flex-direction: column;
+}
