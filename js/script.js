@@ -1,12 +1,12 @@
 $(function() {
-    $('body').append('<div class="todo"></div>');
+    $('body').append('<ul class="todo"></ul>');
     $('#add_btn').click(function() {
         var textValue = $('#text').val();
-        $('div.todo').append(`<input type="checkbox" class="checkbox"><label>${textValue}</label>`);
+        $('ul').append(`<li><input type="checkbox" class="checkbox">${textValue}</li>`);
         $('#text').val('');
     })
-    $('#edit_btn').click(function() {
-        $('input').removeClass('checkbox');
-    });
 
+    $('#edit_btn').click(function() {
+        $('input.checkbox').removeClass('checkbox');
+    });
 })
