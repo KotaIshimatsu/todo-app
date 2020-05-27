@@ -3,9 +3,8 @@
 }
 label {
     font-size: 40px;
-    
 }
 .todo {
-    display: flex;
-    flex-direction: column;
+    list-style: none;
+    font-size: 40px;
 }
