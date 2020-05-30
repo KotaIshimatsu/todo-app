@@ -1,12 +1,32 @@
-$(function() {
-    $('body').append('<ul class="todo"></ul>');
-    $('#add_btn').click(function() {
-        var textValue = $('#text').val();
-        $('ul').append(`<li><input type="checkbox" class="checkbox">${textValue}</li>`);
-        $('#text').val('');
-    })
+function renderListElement(textValue) {
+    return (
+        `
+            <li>
+                <input
+                    type="checkbox"
+                    class="checkbox"
+                >
+                ${textValue}
+            </li>
+        `
+    );
+}
 
-    $('#edit_btn').click(function() {
+$(function () {
+    $('#add_btn').click(function () {
+        var textValue = $('#text').val();
+        var element = renderListElement(textValue);
+        $('ul').append(element);
+        $('#text').val('');
+    });
+
+    $('#edit_btn').click(function () {
         $('input.checkbox').removeClass('checkbox');
     });
-})
+
+    $('#delete_btn').click(function () {
+        $.each($('li input:checked'), function (_index, element) {
+            $(element).parent().remove();
+        });
+    });
+});
