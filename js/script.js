@@ -7,6 +7,7 @@ function renderListElement(textValue) {
                     class="checkbox"
                 >
                 ${textValue}
+                <span class="span"></span>
             </li>
         `
     );
@@ -18,6 +19,10 @@ $(function () {
         var element = renderListElement(textValue);
         $('ul').append(element);
         $('#text').val('');
+
+        var str1 = $('#category option:selected').text();
+        $('.span').text(str1);
+
     });
 
     $('#edit_btn').click(function () {
