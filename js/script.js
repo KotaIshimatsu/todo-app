@@ -1,4 +1,5 @@
-function renderListElement(textValue) {
+function renderListElement(textValue, selectedCategoryName) {
+    var selectedCategoryName = $('#category').val();
     return (
         `
             <li>
@@ -7,7 +8,9 @@ function renderListElement(textValue) {
                     class="checkbox"
                 >
                 ${textValue}
-                
+                <span class="categoryName">
+                    ${selectedCategoryName}
+                </span>
             </li>
         `
     );
@@ -19,10 +22,6 @@ $(function () {
         var element = renderListElement(textValue);
         $('ul').append(element);
         $('#text').val('');
-
-        var selectedCategoryName = $('#category').val();
-        $('ul').append(`<span class="categoryName">${selectedCategoryName}</span>`);
-
     });
 
     $('#edit_btn').click(function () {
