@@ -1,4 +1,4 @@
-function renderListElement(textValue, selectedCategoryName) {
+function renderListElement(textValue) {
     var selectedCategoryName = $('#category').val();
     return (
         `
