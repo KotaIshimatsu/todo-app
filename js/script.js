@@ -10,6 +10,7 @@ function renderCategoryList() {
     CATEGORY.map(function(category) {
         var label = category ? category : '選択してください';
         $('#category').append(`<option value=${category}>${label}</option>`);
+        $('#select_search').append(`<option value=${category}>${label}</option>`);
     });
 }
 
@@ -31,8 +32,8 @@ function renderListElement(textValue) {
     );
 }
 
-function onClickSearchButton() {
-    var searchWord = $('#search_box').val();
+function changeCategorySearch() {
+    var searchWord = $('#select_search').val();
     var $words = $('.categoryName');
     $('.todoItem').show();
     for (var i = 0; i <= $words.length - 1; i++) {
@@ -64,7 +65,7 @@ $(function () {
         });
     });
 
-    $('#execute_search').click(function() {
-        onClickSearchButton();
+    $('#select_search').change(function() {
+        changeCategorySearch();
     });
 });
