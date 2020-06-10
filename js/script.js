@@ -57,6 +57,7 @@ $(function () {
 
     $('#edit_btn').click(function () {
         $('input.checkbox').removeClass('checkbox');
+        $('ul:not(:animated).dropdwn').slideToggle(300);
     });
 
     $('#delete_btn').click(function () {
