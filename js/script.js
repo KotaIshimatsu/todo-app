@@ -22,6 +22,7 @@ function renderListElement(textValue) {
                 <input
                     type="checkbox"
                     class="checkbox"
+                    name="check"
                 >
                 <span class="todoLabel">${textValue}</span>
                 <span class="categoryName">
@@ -57,7 +58,10 @@ $(function () {
 
     $('#edit_btn').click(function () {
         $('input.checkbox').removeClass('checkbox');
-        $('ul:not(:animated).dropdwn').slideToggle(300);
+    });
+    
+    $(document).on('change','[name="check"]',function() {
+        $('ul:not(:animated).dropdwn').slideDown(300);
     });
 
     $('#delete_btn').click(function () {
