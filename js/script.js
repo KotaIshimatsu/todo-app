@@ -22,7 +22,7 @@ function renderListElement(textValue) {
                 <input
                     type="checkbox"
                     class="checkbox"
-                    name="check"
+                    onclick="onClickCheckbox()"
                 >
                 <span class="todoLabel">${textValue}</span>
                 <span class="categoryName">
@@ -46,6 +46,22 @@ function changeCategorySearch() {
     }
 }
 
+function onClickCheckbox() {
+    var $checkBox = $('.todoItem > input');
+    var isChecked = false;
+    $checkBox.each(function(_index, value) {
+        if ($(value).prop('checked')) {
+            isChecked = true;
+        }
+    });
+
+    if (isChecked) {
+        $('ul:not(:animated).dropdwn').slideDown(300);  
+    } else {
+        $('.dropdwn').hide();
+    }
+}
+
 $(function () {
     renderCategoryList();
 
@@ -58,10 +74,6 @@ $(function () {
 
     $('#edit_btn').click(function () {
         $('input.checkbox').removeClass('checkbox');
-    });
-    
-    $(document).on('change','[name="check"]',function() {
-        $('ul:not(:animated).dropdwn').slideDown(300);
     });
 
     $('#delete_btn').click(function () {
