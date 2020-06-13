@@ -70,6 +70,13 @@ function onClickCategoryDropdown(event) {
     console.log($('.todoItem input:checked').parent());
 }
 
+function sampleHandleLocalStorage() {
+    var localStorage = window.localStorage;
+    localStorage.setItem('label', 'hoge');
+    var storagedLabel = localStorage.getItem('label');
+    console.log(storagedLabel);
+}
+
 $(function () {
     renderCategoryList();
 
