@@ -62,6 +62,14 @@ function onClickCheckbox() {
     }
 }
 
+function onClickCategoryDropdown(event) {
+    event.preventDefault();
+    var target = event.target;
+    var $value = $(target).text();
+    console.log($value);
+    console.log($('.todoItem input:checked').parent());
+}
+
 $(function () {
     renderCategoryList();
 
