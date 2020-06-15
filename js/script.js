@@ -11,6 +11,18 @@ function renderCategoryList() {
         var label = category ? category : '選択してください';
         $('#category').append(`<option value=${category}>${label}</option>`);
         $('#select_search').append(`<option value=${category}>${label}</option>`);
+        if (category === '') {
+            return null;
+        }
+        $('.dropdwn').append(
+            `
+                <li onclick="onClickCategoryDropdown(event)">
+                    <a href="#">
+                        ${category}
+                    </a>
+                </li>
+            `
+        );
     });
 }
 
