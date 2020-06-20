@@ -78,8 +78,11 @@ function onClickCategoryDropdown(event) {
     event.preventDefault();
     var target = event.target;
     var $value = $(target).text();
-    console.log($value);
-    console.log($('.todoItem input:checked').parent());
+    var $checkedTodoElementList = $('.todoItem input:checked').parent();
+    $checkedTodoElementList.each(function(_index, element) {
+        $(element).children('.categoryName').text($value);
+    });
+    $('.dropdwn').hide();
 }
 
 function sampleHandleLocalStorage() {
