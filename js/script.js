@@ -6,6 +6,8 @@ var CATEGORY = [
     'プライベート',
 ];
 
+var STORAGE_KEY = 'todo_app';
+
 function renderCategoryList() {
     CATEGORY.map(function(category) {
         var label = category ? category : '選択してください';
@@ -26,8 +28,7 @@ function renderCategoryList() {
     });
 }
 
-function renderListElement(textValue) {
-    var selectedCategoryName = $('#category').val();
+function renderListElement(textValue, selectedCategoryName) {
     return (
         `
             <li class="todoItem">
@@ -92,14 +93,39 @@ function sampleHandleLocalStorage() {
     console.log(storagedLabel);
 }
 
+function saveToLocalStorage(todoLabel, categoryName) {
+    var localStorage = window.localStorage;
+    var todoItem = {
+        todoLabel: todoLabel,
+        categoryName: categoryName,
+    };
+    var savedItem = localStorage.getItem(STORAGE_KEY);
+    var itemList = [];
+
+    if (savedItem === null) {
+        // localStorageにアイテムが無い(null) ＝ 初めて使う場合
+        itemList = [todoItem];
+    } else {
+        // localStorageにアイテムがある ＝ 2回目以降に使う場合
+        // localStorageに保存済みのデータは、文字列になっている
+        // 文字列から配列に戻す
+        itemList = JSON.parse(savedItem);
+        itemList.push(todoItem);
+    }
+    // localStorageにデータを保存する際は、データを文字列に変換しないといけない
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(itemList));
+}
+
 $(function () {
     renderCategoryList();
 
     $('#add_btn').click(function () {
         var textValue = $('#text').val();
-        var element = renderListElement(textValue);
+        var categoryName = $('#category').val();
+        var element = renderListElement(textValue, categoryName);
         $('.todo').append(element);
         $('#text').val('');
+        saveToLocalStorage(textValue, categoryName);
     });
 
     $('#edit_btn').click(function () {
