@@ -126,7 +126,7 @@ $(function () {
         } else {
             var array = JSON.parse(renderItem);
             $.each(array, function(_index, element) {
-                $('.todo').append(renderListElement(element));
+                $('.todo').append(element);
             })
         }
 
