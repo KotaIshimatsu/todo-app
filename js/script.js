@@ -119,6 +119,19 @@ function saveToLocalStorage(todoLabel, categoryName) {
 $(function () {
     renderCategoryList();
 
+    function renderItemFromLocalStorage() {
+        var renderItem = localStorage.getItem(STORAGE_KEY);
+        if (renderItem === null) {
+            
+        } else {
+            var array = JSON.parse(renderItem);
+            $.each(array, function(_index, element) {
+                $('.todo').append(element);
+            })
+        }
+
+    }
+
     $('#add_btn').click(function () {
         var textValue = $('#text').val();
         var categoryName = $('#category').val();
