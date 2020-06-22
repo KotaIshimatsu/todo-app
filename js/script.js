@@ -126,10 +126,9 @@ $(function () {
         } else {
             var array = JSON.parse(renderItem);
             $.each(array, function(_index, element) {
-                $('.todo').append(element);
+                $('.todo').append(renderListElement(element));
             })
         }
-
     }
 
     $('#add_btn').click(function () {
