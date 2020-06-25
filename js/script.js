@@ -116,20 +116,20 @@ function saveToLocalStorage(todoLabel, categoryName) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(itemList));
 }
 
+function renderItemFromLocalStorage() {
+    var renderItem = localStorage.getItem(STORAGE_KEY);
+    if (renderItem !== null) {
+        var array = JSON.parse(renderItem);
+        $.each(array, function(_index, element) {
+            $('.todo').append(renderListElement(element.todoLabel, element.categoryName));
+        })
+    }
+}
+
 $(function () {
     renderCategoryList();
-
-    function renderItemFromLocalStorage() {
-        var renderItem = localStorage.getItem(STORAGE_KEY);
-        if (renderItem === null) {
-            
-        } else {
-            var array = JSON.parse(renderItem);
-            $.each(array, function(_index, element) {
-                $('.todo').append(renderListElement(element));
-            })
-        }
-    }
+    
+    renderItemFromLocalStorage();
 
     $('#add_btn').click(function () {
         var textValue = $('#text').val();
