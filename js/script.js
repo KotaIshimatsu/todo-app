@@ -126,9 +126,23 @@ function renderItemFromLocalStorage() {
     }
 }
 
-function deleteItemToLocalStorage() {
-    var deleteItem = localStorage.getItem(STORAGE_KEY);
-    console.log(deleteItem);
+function deleteItemToLocalStorage(todoLabel, categoryName) {
+    var deleteItemList = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    // todoLabelとcategoryName両方が一致したら、対象のTODOとみなす
+    // 本当は、todoにId等を設定しておくのが望ましい
+    var index = deleteItemList.findIndex(function(item) {
+        return item.todoLabel === todoLabel.trim() 
+            && item.categoryName === categoryName.trim();
+    });
+
+    if (index < 0) {
+        return;
+    }
+
+    // 配列から、該当の要素を削除
+    deleteItemList.splice(index, 1);
+    // localStorageにデータを保存する際は、データを文字列に変換しないといけない
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(deleteItemList));
 }
 
 $(function () {
@@ -152,9 +166,11 @@ $(function () {
     $('#delete_btn').click(function () {
         $.each($('li input:checked'), function (_index, element) {
             $(element).parent().remove();
+            // 削除するTODOのtodoLabelとcategoryNameを抽出
+            var $todoLabel = $(element).parent().children('.todoLabel').text();
+            var $categoryName = $(element).parent().children('.categoryName').text();
+            deleteItemToLocalStorage($todoLabel, $categoryName);
         });
-
-        deleteItemToLocalStorage();
     });
 
     $('#select_search').change(function() {
