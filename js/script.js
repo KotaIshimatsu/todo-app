@@ -126,6 +126,11 @@ function renderItemFromLocalStorage() {
     }
 }
 
+function deleteItemToLocalStorage() {
+    var deleteItem = localStorage.getItem(STORAGE_KEY);
+    console.log(deleteItem);
+}
+
 $(function () {
     renderCategoryList();
     
@@ -148,6 +153,8 @@ $(function () {
         $.each($('li input:checked'), function (_index, element) {
             $(element).parent().remove();
         });
+
+        deleteItemToLocalStorage();
     });
 
     $('#select_search').change(function() {
