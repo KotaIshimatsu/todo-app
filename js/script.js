@@ -82,6 +82,7 @@ function onClickCategoryDropdown(event) {
     var $checkedTodoElementList = $('.todoItem input:checked').parent();
     $checkedTodoElementList.each(function(_index, element) {
         $(element).children('.categoryName').text($value);
+        rewriteCategoryFromLoclStorage($value);
     });
     $('.dropdwn').hide();
 }
@@ -143,6 +144,15 @@ function deleteItemToLocalStorage(todoLabel, categoryName) {
     deleteItemList.splice(index, 1);
     // localStorageにデータを保存する際は、データを文字列に変換しないといけない
     localStorage.setItem(STORAGE_KEY, JSON.stringify(deleteItemList));
+}
+
+function rewriteCategoryFromLoclStorage() {
+    var rewriteItemList = JSON.parse(localeStorage.getItem(STORAGE_KEY));
+    
+    
+    
+    rewriteItemList.splice(index, 1, );
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(rewriteItemList));
 }
 
 $(function () {
