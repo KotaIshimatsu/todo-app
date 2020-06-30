@@ -146,12 +146,13 @@ function deleteItemToLocalStorage(todoLabel, categoryName) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(deleteItemList));
 }
 
-function rewriteCategoryFromLoclStorage() {
+function rewriteCategoryFromLoclStorage(categoryName) {
     var rewriteItemList = JSON.parse(localeStorage.getItem(STORAGE_KEY));
+    var index = rewriteItemList.findIndex(function(item) {
+        return item.categoryName !== categoryName.trim();
+    });
     
-    
-    
-    rewriteItemList.splice(index, 1, );
+
     localStorage.setItem(STORAGE_KEY, JSON.stringify(rewriteItemList));
 }
 
