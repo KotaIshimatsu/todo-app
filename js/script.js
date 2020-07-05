@@ -81,8 +81,10 @@ function onClickCategoryDropdown(event) {
     var $value = $(target).text();
     var $checkedTodoElementList = $('.todoItem input:checked').parent();
     $checkedTodoElementList.each(function(_index, element) {
+        var $todoLabel = $(element).children('.todoLabel').text();
+        var $categoryName = $(element).children('.categoryName').text();
+        rewriteCategoryFromLocalStorage($value, $todoLabel, $categoryName);
         $(element).children('.categoryName').text($value);
-        rewriteCategoryFromLoclStorage($value);
     });
     $('.dropdwn').hide();
 }
@@ -146,13 +148,21 @@ function deleteItemToLocalStorage(todoLabel, categoryName) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(deleteItemList));
 }
 
-function rewriteCategoryFromLoclStorage(categoryName) {
-    var rewriteItemList = JSON.parse(localeStorage.getItem(STORAGE_KEY));
+function rewriteCategoryFromLocalStorage(selectedCategoryName, targetTodoLabel, targetCategoryName) {
+    var rewriteItemList = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    // todoLabelとcategoryName両方が一致したら、対象のTODOとみなす
+    // 本当は、todoにId等を設定しておくのが望ましい
     var index = rewriteItemList.findIndex(function(item) {
-        return item.categoryName !== categoryName.trim();
+        return item.todoLabel === targetTodoLabel.trim() 
+            && item.categoryName === targetCategoryName.trim();
     });
     
+    if (index < 0) {
+        return;
+    }
 
+    // 配列内のオブジェクトのcategoryNameを書き換える
+    rewriteItemList[index].categoryName = selectedCategoryName.trim();
     localStorage.setItem(STORAGE_KEY, JSON.stringify(rewriteItemList));
 }
 
